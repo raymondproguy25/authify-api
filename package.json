@@ -1,9 +1,10 @@
 {
-  "name": "authify",
+  "name": "authify-api",
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon --exec ts-node-esm src/index.ts",
+    "dev": "nodemon --exec ts-node-esm src/app.ts",
+    "build": "tsc",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
   },
