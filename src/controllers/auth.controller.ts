@@ -10,7 +10,8 @@ import jwt from "jsonwebtoken";
 
 export const signUpUsers = async (req: Request, res: Response) =>{
   try {
-    const { username, email, phone, password } = req.body;
+    let { username, email, phone, password } = req.body;
+    email = email.trim().toLowerCase();
 
     // Checks for duplicate email in database
     const checkIfUserExits = await 
@@ -51,7 +52,8 @@ export const signUpUsers = async (req: Request, res: Response) =>{
  export const signInUser = async (req: Request, 
                                   res: Response) =>{
   try {
-    const { email, password } = req.body;
+    let { email, password } = req.body;
+    email = email.trim().toLowerCase();
     const user = await UserInfo.findOne({ email }); 
     // check if user with email exits
     if (!user) {
