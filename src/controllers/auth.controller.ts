@@ -2,10 +2,11 @@
 import type { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import UserInfo from "../models/user.models.ts";
+import jwt from "jsonwebtoken";
 
-//@desc Register new account
-//@route POST /auth/signup
-//@access Public
+// @desc Register new account
+// @route POST /auth/signup
+// @access Public
 
 export const signUpUsers = async (req: Request, res: Response) =>{
   try {
@@ -37,6 +38,44 @@ export const signUpUsers = async (req: Request, res: Response) =>{
   } catch (error) {
     console.error("Opps can't register user somthing missing", error);
 
-    return res.json(500).json({ message: "Somthing went wrong" });
+    return res.json(500).json({ message: "Server error" });
+  }
+};
+
+/**
+ * @desc    Login a user
+ * @route   POST /auth/signin
+ * @access  Public
+ */
+
+ export const signInUser = async (req: Request, 
+                                  res: Response) =>{
+  try {
+    const { email, password } = req.body;
+    const user = await UserInfo.findOne({ email }); 
+    // check if user with email exits
+    if (!user) {
+      return res.status(400).json({ message: "Invalid credentails, please try again "});
+    }
+    // compare password fir safty
+    const comfirmPassword = await bcrypt.compare(password, user.password);
+    if (!comfirmPassword) {
+      return res.status(401).json({ message: "Invalid credentails"});
+    } 
+    // generate token for user
+    const generateToken = jwt.sign({userId: user._id, email: user.email },
+      process.env.JWT_SECRET as string,
+      { expiresIn: "1h" }
+    );
+    return res.status(201).json({ message: "Login successfully ", generateToken, user: {
+     id: user._id,
+     username: user.username,
+     email: user.email,
+      },
+    });
+  } catch (error) {
+    console.error("Opps can't login somthing went wrong trying to login:", error);
+
+    res.status(500).json({ message: "Server error" });
   }
 };
