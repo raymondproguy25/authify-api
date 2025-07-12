@@ -1,12 +1,11 @@
-// src/middleware/auth.middleware.07:17:56
+// src/middleware/auth.middleware.ts
 
 import Jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
 
- export interface AuthRequest extends Request
-{
+export type AuthRequest = Request & {
   user?: any;
-}
+};
 
 // Middleware to verify jwt token 
 export const protect = (
@@ -15,13 +14,13 @@ export const protect = (
   next: NextFunction,
 ) => {
   try {
-    const authHeder = req.headers.authorization;
+    const authHeader = req.headers.authorization;
 
     // Check for Bearer token
-    if (!authHeder || !authHeder.startsWith("Bearer ")) {
+    if (!authHeader || !authHeader.startsWith("Bearer ")) {
       return res.status(401).json({ message: "Unauthorized no token provided" });
     }
-    const token = authHeder.split("")[1];
+    const token = authHeader.split(" ")[1];
 
     // Verify token 
     const decode = Jwt.verify(token, process.env.JWT_SECRET as string);
@@ -35,5 +34,6 @@ export const protect = (
     return res.status(401).json({ message: "Unauthorized: invalid token"});
   }
 };
+
 
 
