@@ -9,6 +9,7 @@ import express from 'express';
 import connectDB from './config/database.ts';
 import dotenv from 'dotenv';
 import authRoutes from "./routes/auth.route.ts";
+import dashboardRoute from "./routes/dashboard.route.ts";
 
 dotenv.config();
 
@@ -17,6 +18,7 @@ const app = express();
 app.use(express.json());
 
 app.use("/auth", authRoutes);
+app.use("/", dashboardRoute);
 
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to Authify API.' });
