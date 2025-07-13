@@ -3,8 +3,8 @@ import express from "express";
 import { signUpUsers, signInUser } from 
 "../controllers/auth.controller.ts";
 import UserInfo from "../models/user.models.ts";
-import { AuthRequest, protect } from "../middleware/auth.middleware.ts";
-
+import type { AuthRequest } from "../middleware/auth.middleware.ts";
+import { protect } from "../middleware/auth.middleware.ts";
 const router = express.Router();
 
 router.post("/signup", signUpUsers);
@@ -19,11 +19,9 @@ router.post("/logout", (_req, res) =>{
 // Get current user profile (protected route)
 router.get("/profile", protect, async (req: AuthRequest, res) =>{
   try {
-    const user = UserInfo.findOne(req.user.userId).select("password");
-    if (!user) {
-     return res.status(404).json({ message: "User not found "});
-    } 
-    res.status(200).json({ profile: user });
+    console.log("Decoded user in request:", req.user);
+    const { userId, email } = req.body || {};
+     res.status(200).json({ message: "User profile fatched succesfully:", user: { userId, email}, });
   } catch (error) {
     console.error("Profile error:", error);
 

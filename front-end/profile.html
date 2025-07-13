@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dashboard - Authify</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h2>Welcome, <span id="user-name">User</span> 👋</h2>
+    <p class="subtext">You’re logged in to your <span class="highlight">Authify</span> dashboard</p>
+
+    <div class="dashboard-info">
+      <p>This is your secure area. In future, you can show user data, settings, etc.</p>
+    </div>
+
+    <button id="logout-btn" class="btn secondary">Logout</button>
+  </div>
+
+  <script>
+    // Check login state
+    const user = localStorage.getItem("auth_user");
+    if (!user) {
+      window.location.href = "login.html"; // redirect if not logged in
+    } else {
+      const userData = JSON.parse(user);
+      document.getElementById("user-name").textContent = userData.username || "User";
+    }
+
+    // Logout logic
+    document.getElementById("logout-btn").addEventListener("click", () => {
+      localStorage.removeItem("auth_user");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
