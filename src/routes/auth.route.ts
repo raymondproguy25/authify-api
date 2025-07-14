@@ -5,6 +5,8 @@ import { signUpUsers, signInUser } from
 import UserInfo from "../models/user.models.ts";
 import type { AuthRequest } from "../middleware/auth.middleware.ts";
 import { protect } from "../middleware/auth.middleware.ts";
+import { updateProfile } from "../controllers/auth.controller.ts";
+
 const router = express.Router();
 
 router.post("/signup", signUpUsers);
@@ -14,7 +16,10 @@ router.post("/signin", signInUser);
 router.post("/logout", (_req, res) =>{
   // Just a succes message nothing more
   res.status(200).json({ message: "Logged out succesfully "});
-})
+});
+
+// Update Profile route
+router.patch("/update-profile", protect, updateProfile);
 
 // Get current user profile (protected route)
 router.get("/profile", protect, async (req: AuthRequest, res) =>{
