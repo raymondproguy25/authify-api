@@ -6,6 +6,7 @@ import UserInfo from "../models/user.models.ts";
 import type { AuthRequest } from "../middleware/auth.middleware.ts";
 import { protect } from "../middleware/auth.middleware.ts";
 import { updateProfile } from "../controllers/auth.controller.ts";
+import { changePassword } from "../controllers/auth.controller.ts";
 
 const router = express.Router();
 
@@ -20,6 +21,9 @@ router.post("/logout", (_req, res) =>{
 
 // Update Profile route
 router.patch("/update-profile", protect, updateProfile);
+
+// Change password route
+  router.patch("/change-password", protect, changePassword);
 
 // Get current user profile (protected route)
 router.get("/profile", protect, async (req: AuthRequest, res) =>{
