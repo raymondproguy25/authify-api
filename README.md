@@ -58,3 +58,5 @@ Passionate backend developer building open-source tools for developers.
 ## 📄 License
 
 Licensed under the **MIT License** – feel free to use, fork, and build on it.
+
+If you found this helpful, star ⭐, or share!

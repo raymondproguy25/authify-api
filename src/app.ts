@@ -12,6 +12,7 @@ import path from 'path';
 import helmet from "helmet";
 import authRoutes from "./routes/auth.route.ts";
 import dashboardRoute from "./routes/dashboard.route.ts";
+import { setupSwaggerDocs } from "./config/swagger.ts";
 
 dotenv.config();
 
@@ -24,6 +25,8 @@ app.use(express.static(path.join(process.cwd(), 'public')));
 
 app.use("/api/v1/auth", authRoutes);
 app.use("/api", dashboardRoute);
+
+setupSwaggerDocs(app);
 
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to Authify API.' });

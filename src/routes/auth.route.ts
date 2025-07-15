@@ -2,11 +2,10 @@
 import express from "express";
 import { signUpUsers, signInUser } from 
 "../controllers/auth.controller.ts";
-import UserInfo from "../models/user.models.ts";
 import type { AuthRequest } from "../middleware/auth.middleware.ts";
 import { protect } from "../middleware/auth.middleware.ts";
-import { updateProfile } from "../controllers/auth.controller.ts";
-import { changePassword } from "../controllers/auth.controller.ts";
+import { updateProfile } from "../controllers/user.controller.ts";
+import { changePassword } from "../controllers/user.controller.ts";
 
 const router = express.Router();
 
@@ -33,8 +32,7 @@ router.get("/profile", protect, async (req: AuthRequest, res) =>{
      res.status(200).json({ message: "User profile fatched succesfully:", user: { userId, email}, });
   } catch (error) {
     console.error("Profile error:", error);
-
-    res.status(500).json({ message: "Server error" });
+   return res.status(500).json({ message: "Server error" }); 
   }
 });
 
