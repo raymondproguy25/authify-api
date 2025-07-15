@@ -46,6 +46,50 @@ authify-api/
 
 ---
 
+---
+
+🔗 How to Use
+
+1. Install dependencies:
+
+npm install
+
+
+2. Start the server:
+
+npm run dev
+
+
+3. Visit the frontend:
+
+http://localhost:5000/ → Home
+
+http://localhost:5000/signup.html
+
+http://localhost:5000/signin.html
+
+
+
+4. API Docs (Swagger UI):
+
+http://localhost:5000/api-docs
+
+---
+
+🧪 Tech Stack
+
+Backend: Node.js + Express.js + TypeScript
+
+Frontend: HTML + CSS + JS (served from /public)
+
+Database: MongoDB (via Mongoose)
+
+Auth: JWT
+
+Docs: Swagger (OpenAPI)
+
+---
+
 ## 🧑‍💻 Built With ❤️ By
 
 **Raymond Pro Guy**  
