@@ -24,6 +24,21 @@ router.patch("/update-profile", protect, updateProfile);
 // Change password route
   router.patch("/change-password", protect, changePassword);
 
+/**
+ * @swagger
+ * /api/v1/auth/profile:
+ *   get:
+ *     summary: Get user profile
+ *     tags: [User]
+ *     security:
+ *       - bearerAuth: []
+ *     responses:
+ *       200:
+ *         description: User profile returned
+ *       401:
+ *         description: Unauthorized
+ */
+
 // Get current user profile (protected route)
 router.get("/profile", protect, async (req: AuthRequest, res) =>{
   try {
