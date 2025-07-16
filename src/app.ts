@@ -31,6 +31,11 @@ setupSwaggerDocs(app);
 app.get('/', (_req, res) => {
   res.json({ message: 'Welcome to Authify API.' });
 });
+
+app.get('/health', (_req, res) => {
+  res.status(200).json({ status: 'OK' });
+});
+
 connectDB().then(() =>{
 const PORT = process.env.PORT || 5000;
 const host = "0.0.0.0";
