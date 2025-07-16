@@ -33,7 +33,8 @@ app.get('/', (_req, res) => {
 });
 connectDB().then(() =>{
 const PORT = process.env.PORT || 5000;
- app.listen(PORT, () => {
- console.log(`Server runinig on http://localhost:${PORT}`)
+const host = "0.0.0.0";
+ app.listen(Number(PORT), host, () => {
+ console.log(`Server runnig on http://${host}:${PORT}`)
  });
 });
