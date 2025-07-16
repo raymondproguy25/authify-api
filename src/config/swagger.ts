@@ -1,3 +1,4 @@
+// @ts-expect-error: No types available for 'swagger-jsdoc'
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import type { Express } from "express";
@@ -16,6 +17,20 @@ const options = {
         description: "Development server",
       },
     ],
+    components: {
+    securitySchemes: {
+    bearerAuth: {
+      type: "http",
+      scheme: "bearer",
+      bearerFormat: "JWT",
+    },
+  },
+}, 
+security: [
+  {
+    bearerAuth: [],
+  },
+],
   },
   apis: ["./src/routes/*.ts", "./src/controllers/*.ts"],
 };

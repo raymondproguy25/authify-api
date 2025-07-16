@@ -5,6 +5,7 @@
     "moduleResolution": "node",
     "outDir": "dist",
     "allowImportingTsExtensions": true,
+    "noEmit": false,
     "moduleDetection": "force",
     "resolveJsonModule": true,
     "esModuleInterop": true,
