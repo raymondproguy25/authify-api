@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon --exec ts-node-esm src/app.ts",
+    "build": "tsx src/app.ts",  
     "start": "tsx src/app.ts",
     "lint": "eslint . --ext .ts",
     "format": "prettier --write ."
